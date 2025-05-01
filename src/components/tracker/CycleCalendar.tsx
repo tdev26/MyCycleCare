@@ -5,22 +5,39 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useUser } from '../../context/UserContext';
 import { getPredictionData } from '../../data/mockData';
 
+/**
+ * CycleCalendar Component
+ * Displays a calendar with menstrual cycle tracking and predictions
+ */
 const CycleCalendar = () => {
+  // State to track the currently displayed month
   const [currentDate, setCurrentDate] = useState(new Date());
+  // Get user data from context
   const { user } = useUser();
   
+  // Return null if no user data is available
   if (!user) return null;
   
+  // Get prediction data for the user's cycle
   const predictions = getPredictionData(user);
   
+  /**
+   * Navigate to the previous month
+   */
   const prevMonth = () => {
     setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() - 1, 1));
   };
   
+  /**
+   * Navigate to the next month
+   */
   const nextMonth = () => {
     setCurrentDate(prevDate => new Date(prevDate.getFullYear(), prevDate.getMonth() + 1, 1));
   };
   
+  /**
+   * Render the calendar header with navigation buttons and current month/year
+   */
   const renderHeader = () => {
     return (
       <div className="flex items-center justify-between mb-4">
@@ -43,6 +60,9 @@ const CycleCalendar = () => {
     );
   };
   
+  /**
+   * Render the weekday headers
+   */
   const renderDays = () => {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     
@@ -60,6 +80,9 @@ const CycleCalendar = () => {
     );
   };
   
+  /**
+   * Render the calendar grid cells
+   */
   const renderCells = () => {
     const monthStart = startOfMonth(currentDate);
     const monthEnd = endOfMonth(monthStart);
@@ -70,7 +93,11 @@ const CycleCalendar = () => {
     let days = [];
     let day = startDate;
     
-    // Check if day is in a period
+    /**
+     * Check if a given date falls within a recorded period
+     * @param {Date} date - The date to check
+     * @returns {boolean}
+     */
     const isInPeriod = (date: Date) => {
       return user.cycleData.some(cycle => {
         if (!cycle.endDate) return false;
@@ -81,7 +108,11 @@ const CycleCalendar = () => {
       });
     };
     
-    // Check if day is predicted next period
+    /**
+     * Check if a given date falls within the predicted next period
+     * @param {Date} date - The date to check
+     * @returns {boolean}
+     */
     const isInPredictedPeriod = (date: Date) => {
       const nextPeriodStart = parseISO(predictions.nextPeriodPrediction);
       const nextPeriodEnd = addDays(nextPeriodStart, predictions.avgPeriodLength - 1);
@@ -92,7 +123,11 @@ const CycleCalendar = () => {
       });
     };
     
-    // Check if day is in fertile window
+    /**
+     * Check if a given date falls within the fertile window
+     * @param {Date} date - The date to check
+     * @returns {boolean}
+     */
     const isInFertileWindow = (date: Date) => {
       return isWithinInterval(date, {
         start: parseISO(predictions.fertileWindowStart),
@@ -100,11 +135,16 @@ const CycleCalendar = () => {
       });
     };
     
-    // Check if day is ovulation day
+    /**
+     * Check if a given date is the predicted ovulation day
+     * @param {Date} date - The date to check
+     * @returns {boolean}
+     */
     const isOvulationDay = (date: Date) => {
       return isSameDay(date, parseISO(predictions.ovulationPrediction));
     };
     
+    // Build the calendar grid
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
         const cloneDay = day;
@@ -124,7 +164,7 @@ const CycleCalendar = () => {
               ${isToday ? 'font-bold' : ''}
             `}
           >
-            {/* Background indicators */}
+            {/* Background indicators for different cycle phases */}
             {isPeriodDay && (
               <div className="absolute inset-0 rounded-full bg-red-200 dark:bg-red-900 opacity-50"></div>
             )}
@@ -138,12 +178,12 @@ const CycleCalendar = () => {
               <div className="absolute inset-0 rounded-full bg-blue-200 dark:bg-blue-800 opacity-50"></div>
             )}
             
-            {/* Day number */}
+            {/* Display the day number */}
             <span className={`z-10 ${isToday ? 'text-purple-700 dark:text-purple-300' : ''}`}>
               {format(day, 'd')}
             </span>
             
-            {/* Today indicator */}
+            {/* Special indicator for today's date */}
             {isToday && (
               <div className="absolute inset-0 rounded-full border-2 border-purple-500 dark:border-purple-400"></div>
             )}
@@ -173,6 +213,7 @@ const CycleCalendar = () => {
       {renderDays()}
       {renderCells()}
       
+      {/* Legend for calendar indicators */}
       <div className="mt-4 flex flex-wrap gap-3 text-sm">
         <div className="flex items-center">
           <div className="w-3 h-3 rounded-full bg-red-200 dark:bg-red-900 mr-1"></div>

@@ -3,26 +3,39 @@ import { Bell, ShieldCheck, Moon, Globe, Clock, Calendar } from 'lucide-react';
 import { useUser } from '../context/UserContext';
 import { useTheme } from '../context/ThemeContext';
 
+/**
+ * SettingsPage Component
+ * Renders the settings page with various configuration options for the user
+ */
 const SettingsPage = () => {
+  // Get user data and theme preferences from context
   const { user } = useUser();
   const { theme, toggleTheme } = useTheme();
   
+  // State for cycle and period length settings
   const [cycleLengthAvg, setCycleLengthAvg] = useState(user?.preferences.cycleLengthAvg || 28);
   const [periodLengthAvg, setPeriodLengthAvg] = useState(user?.preferences.periodLengthAvg || 5);
+  
+  // State for notification preferences
   const [notificationsEnabled, setNotificationsEnabled] = useState(user?.preferences.notificationsEnabled || false);
   const [remindersEnabled, setRemindersEnabled] = useState(user?.preferences.remindersEnabled || false);
   
+  /**
+   * Handles saving the user's settings
+   * In a real app, this would persist changes to a backend
+   */
   const saveSettings = () => {
-    // In a real app, this would save to backend
     alert('Settings saved successfully!');
   };
   
   return (
     <div className="space-y-6 max-w-3xl mx-auto">
+      {/* Page Header */}
       <div className="flex items-center justify-between mb-2">
         <h1 className="text-2xl font-bold">Settings</h1>
       </div>
       
+      {/* Cycle Settings Section */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
         <div className="flex items-center mb-4">
           <Calendar size={20} className="text-purple-600 dark:text-purple-400 mr-2" />
@@ -30,6 +43,7 @@ const SettingsPage = () => {
         </div>
         
         <div className="space-y-4">
+          {/* Cycle Length Control */}
           <div>
             <label htmlFor="cycleLength" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Average Cycle Length (days)
@@ -51,6 +65,7 @@ const SettingsPage = () => {
             </p>
           </div>
           
+          {/* Period Length Control */}
           <div>
             <label htmlFor="periodLength" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
               Average Period Length (days)
@@ -74,6 +89,7 @@ const SettingsPage = () => {
         </div>
       </div>
       
+      {/* Notifications Section */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
         <div className="flex items-center mb-4">
           <Bell size={20} className="text-purple-600 dark:text-purple-400 mr-2" />
@@ -81,6 +97,7 @@ const SettingsPage = () => {
         </div>
         
         <div className="space-y-4">
+          {/* Notifications Toggle */}
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-medium text-gray-900 dark:text-white">Enable Notifications</h3>
@@ -111,6 +128,7 @@ const SettingsPage = () => {
             </div>
           </div>
           
+          {/* Reminders Toggle */}
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-medium text-gray-900 dark:text-white">Reminders</h3>
@@ -146,6 +164,7 @@ const SettingsPage = () => {
         </div>
       </div>
       
+      {/* Privacy & Security Section */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
         <div className="flex items-center mb-4">
           <ShieldCheck size={20} className="text-purple-600 dark:text-purple-400 mr-2" />
@@ -153,6 +172,7 @@ const SettingsPage = () => {
         </div>
         
         <div className="space-y-4">
+          {/* App Lock Toggle */}
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-medium text-gray-900 dark:text-white">App Lock</h3>
@@ -177,6 +197,7 @@ const SettingsPage = () => {
             </div>
           </div>
           
+          {/* Data Encryption Toggle */}
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-medium text-gray-900 dark:text-white">Data Encryption</h3>
@@ -203,6 +224,7 @@ const SettingsPage = () => {
             </div>
           </div>
           
+          {/* Data Deletion Option */}
           <div className="pt-2">
             <button className="text-purple-600 dark:text-purple-400 text-sm font-medium hover:underline">
               Delete All My Data
@@ -211,6 +233,7 @@ const SettingsPage = () => {
         </div>
       </div>
       
+      {/* Appearance Section */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6 border border-gray-100 dark:border-gray-700">
         <div className="flex items-center mb-4">
           <Moon size={20} className="text-purple-600 dark:text-purple-400 mr-2" />
@@ -218,6 +241,7 @@ const SettingsPage = () => {
         </div>
         
         <div className="space-y-4">
+          {/* Dark Mode Toggle */}
           <div className="flex items-center justify-between">
             <div>
               <h3 className="font-medium text-gray-900 dark:text-white">Dark Mode</h3>
@@ -250,6 +274,7 @@ const SettingsPage = () => {
         </div>
       </div>
       
+      {/* Action Buttons */}
       <div className="flex justify-end space-x-4 mt-6">
         <button
           className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"

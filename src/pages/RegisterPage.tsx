@@ -1,9 +1,12 @@
+// Import necessary dependencies
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import { UserPlus } from 'lucide-react';
 
+// RegisterPage component for user registration
 const RegisterPage = () => {
+  // State management for form fields
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -11,26 +14,32 @@ const RegisterPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   
+  // Get register function from UserContext and navigation
   const { register } = useUser();
   const navigate = useNavigate();
   
+  // Handle form submission
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Validate all fields are filled
     if (!name || !email || !password || !confirmPassword) {
       setError('Please fill in all fields');
       return;
     }
     
+    // Validate password match
     if (password !== confirmPassword) {
       setError('Passwords do not match');
       return;
     }
     
     try {
+      // Start loading state and clear any previous errors
       setLoading(true);
       setError(null);
       
+      // Attempt to register user and navigate to dashboard
       await register(email, password, name);
       navigate('/dashboard');
     } catch (err) {
@@ -41,21 +50,28 @@ const RegisterPage = () => {
   };
   
   return (
+    // Main container with gradient background
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 p-4">
+      {/* Registration form card */}
       <div className="max-w-md w-full space-y-8 bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+        {/* Header section */}
         <div className="text-center">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Create Account</h1>
           <p className="mt-2 text-gray-600 dark:text-gray-300">Sign up for MyCycleCare</p>
         </div>
         
+        {/* Registration form */}
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+          {/* Error message display */}
           {error && (
             <div className="bg-red-50 dark:bg-red-900/20 text-red-800 dark:text-red-300 p-3 rounded-md text-sm">
               {error}
             </div>
           )}
           
+          {/* Form fields container */}
           <div className="space-y-4">
+            {/* Full Name field */}
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Full Name
@@ -73,6 +89,7 @@ const RegisterPage = () => {
               />
             </div>
             
+            {/* Email field */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Email Address
@@ -90,6 +107,7 @@ const RegisterPage = () => {
               />
             </div>
             
+            {/* Password field */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Password
@@ -107,6 +125,7 @@ const RegisterPage = () => {
               />
             </div>
             
+            {/* Confirm Password field */}
             <div>
               <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                 Confirm Password
@@ -125,6 +144,7 @@ const RegisterPage = () => {
             </div>
           </div>
           
+          {/* Terms and conditions checkbox */}
           <div className="flex items-center">
             <input
               id="agree-terms"
@@ -138,12 +158,14 @@ const RegisterPage = () => {
             </label>
           </div>
           
+          {/* Submit button */}
           <div>
             <button
               type="submit"
               disabled={loading}
               className="w-full flex justify-center items-center py-3 px-4 bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700 text-white rounded-md font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
             >
+              {/* Loading spinner or Create Account text */}
               {loading ? (
                 <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
@@ -159,6 +181,7 @@ const RegisterPage = () => {
           </div>
         </form>
         
+        {/* Login link */}
         <div className="mt-6 text-center">
           <p className="text-sm text-gray-600 dark:text-gray-400">
             Already have an account?{' '}

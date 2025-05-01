@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useUser } from '../../context/UserContext';
 
+// Array of predefined mood options with their respective emojis and labels
 const moods = [
   { id: 'happy', emoji: '😊', label: 'Happy' },
   { id: 'calm', emoji: '😌', label: 'Calm' },
@@ -12,24 +13,37 @@ const moods = [
   { id: 'neutral', emoji: '😐', label: 'Neutral' },
 ];
 
+/**
+ * MoodTracker Component
+ * Allows users to track their daily mood and add journal entries
+ */
 const MoodTracker = () => {
+  // State for managing selected mood and notes
   const [selectedMood, setSelectedMood] = useState<string | null>(null);
   const [notes, setNotes] = useState('');
+  
+  // Get user context and mood update function
   const { user, updateUserMood } = useUser();
   
+  /**
+   * Handles the submission of mood and notes
+   * Updates the user's mood in context and resets the form
+   */
   const handleSubmit = () => {
+    // Return early if no mood selected or no user
     if (!selectedMood || !user) return;
     
+    // Get current date in YYYY-MM-DD format
     const today = new Date().toISOString().split('T')[0];
     
     // Update user mood in context
     updateUserMood(today, selectedMood, notes);
     
-    // Reset form
+    // Reset form fields
     setSelectedMood(null);
     setNotes('');
     
-    // Show success message (in a real app)
+    // Show success message
     alert('Mood logged successfully!');
   };
   
@@ -37,6 +51,7 @@ const MoodTracker = () => {
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-5 border border-gray-100 dark:border-gray-700">
       <h3 className="text-lg font-semibold mb-4">How are you feeling today?</h3>
       
+      {/* Grid of mood selection buttons */}
       <div className="grid grid-cols-4 gap-3 mb-6">
         {moods.map((mood) => (
           <button
@@ -55,6 +70,7 @@ const MoodTracker = () => {
         ))}
       </div>
       
+      {/* Journal entry textarea */}
       <div className="mb-6">
         <label 
           htmlFor="moodNotes"
@@ -72,6 +88,7 @@ const MoodTracker = () => {
         />
       </div>
       
+      {/* Submit button */}
       <button
         className={`
           w-full py-2 rounded-md font-medium shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500
