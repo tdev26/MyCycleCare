@@ -1,37 +1,56 @@
+<p align="center">
+  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDVyNXQycWVwamZycGdyOXhnNWZ6bmxrdmdlMHhzNXZlMHVucGt1ayZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/wa0YVWljRtekMUfke6/giphy.gif"
+       alt="MyCycleCare Banner" width="600" />
+</p>
+
+<h1 align="center">🌸 MyCycleCare</h1>
+<h4 align="center">Women’s Health & Wellness Tracker</h4>
 
 <p align="center">
-  <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeDVyNXQycWVwamZycGdyOXhnNWZ6bmxrdmdlMHhzNXZlMHVucGt1ayZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/wa0YVWljRtekMUfke6/giphy.gif" 
-    alt="MyCycleCare Banner" width="500"/>
+  <a href="https://github.com/Jani-shiv/MyCycleCare/stargazers"><img src="https://img.shields.io/github/stars/Jani-shiv/MyCycleCare?style=social" alt="GitHub stars" /></a>
+  <a href="https://github.com/Jani-shiv/MyCycleCare/watchers"><img src="https://img.shields.io/github/watchers/Jani-shiv/MyCycleCare?style=social" alt="GitHub watchers" /></a>
+  <a href="https://github.com/Jani-shiv/MyCycleCare/network/members"><img src="https://img.shields.io/github/forks/Jani-shiv/MyCycleCare?style=social" alt="GitHub forks" /></a>
+</p>
+
+<p align="center">
+  <a href="https://my-cycle-care.vercel.app" target="_blank">🚀 Live Demo</a> •
+  <a href="#features">Features</a> •
+  <a href="#installation">Installation</a> •
+  <a href="#tech-stack">Tech Stack</a> •
+  <a href="#contributing">Contributing</a> •
+  <a href="#license">License</a>
 </p>
 
 ---
-# 🌸 MyCycleCare  
-### Women’s Health & Wellness Tracker
-
-**MyCycleCare** is your go-to app for seamlessly tracking menstrual cycles, moods, symptoms, and accessing personalized wellness guidance—all wrapped in a privacy-first, beautifully designed interface.
-
----
-
-
 
 ## 🌟 Features
 
 - **Menstrual Cycle Tracker**  
-  Predict your period, log flow & symptoms, and plan ahead.  
+  Plan and predict your cycle, log flow & symptoms.
+
 - **Mood Journal**  
-  Capture daily emotions and uncover meaningful patterns.  
+  Capture daily emotions and visualize trends.
+
 - **Wellness Assistant**  
-  Get personalized tips—nutrition, self-care, mindfulness—tailored to your cycle.  
+  Get personalized self-care tips based on your cycle.
+
 - **Symptom Tracker**  
-  Monitor cramps, fatigue, headaches, and more, all in one spot.
+  Monitor headaches, cramps, fatigue, and more.
+
+- **Analytics Dashboard**  
+  Interactive charts to help you discover patterns.
 
 ---
 
-
-## 🚀 Quick Start
+## 🎬 Quick Start
 
 ```bash
+# Clone the repo
 git clone https://github.com/Jani-shiv/MyCycleCare.git
 cd MyCycleCare
+
+# Install dependencies
 npm install
+
+# Start development server
 npm run dev
