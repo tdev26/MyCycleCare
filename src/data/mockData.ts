@@ -4,8 +4,8 @@ import { add, format, sub } from 'date-fns';
 // Mock user data
 export const mockUser: User = {
   id: 'user123',
-  name: 'Sarah Johnson',
-  email: 'sarah@example.com',
+  name: 'Mini ',
+  email: 'miniprincess@example.com',
   cycleData: [
     {
       id: 'cycle001',
